@@ -10,3 +10,6 @@ yarn test:unit
 yarn test:e2e
 yarn lint
 ```
+
+## 🤺 Documentation Links
+ - [Tailwind Docs](https://tailwindcss.com/docs/installation)
