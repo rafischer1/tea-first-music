@@ -28,10 +28,12 @@
     </div>
     <button
       type="submit"
+      :disabled="showSuccess"
       class="block w-full bg-black text-white py-1.5 px-3 rounded transition hover:bg-gray-800"
     >
       Submit
     </button>
+    <div v-show="showSuccess" class="text-teal-600">Logging in....</div>
   </vee-login-form>
 </template>
 <script lang="ts">
@@ -53,6 +55,7 @@ export default {
   components: { VeeLoginForm, VeeLoginField, ErrorMessage },
   data() {
     return {
+      showSuccess: false,
       schema: {
         password: "required|min:2|max:100",
         email: "required|email",
@@ -67,7 +70,11 @@ export default {
         email: "",
         password: "",
       });
-      this.toggleAuthModal();
+      this.showSuccess = true;
+      setTimeout(() => {
+        this.toggleAuthModal();
+        this.showSuccess = false;
+      }, 1500);
     },
   },
 };

@@ -93,9 +93,11 @@
     <button
       type="submit"
       class="block w-full bg-black text-white py-1.5 px-3 rounded transition hover:bg-gray-800"
+      :disabled="showSuccess"
     >
       Submit
     </button>
+    <div v-show="showSuccess" class="text-teal-600">Signing Up!....</div>
   </vee-form>
 </template>
 <script lang="ts">
@@ -134,6 +136,7 @@ export default {
   components: { VeeForm, VeeField, ErrorMessage },
   data() {
     return {
+      showSuccess: false,
       schema: {
         name: "required|min:2|max:100",
         email: "required|email",
@@ -157,7 +160,11 @@ export default {
         country: "",
         tos: 1,
       });
-      this.toggleAuthModal();
+      this.showSuccess = true;
+      setTimeout(() => {
+        this.toggleAuthModal();
+        this.showSuccess = false;
+      }, 1500);
     },
   },
 };
