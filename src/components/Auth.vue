@@ -156,13 +156,12 @@
 </template>
 <script lang="ts">
 import store from "@/store";
-let x = 0;
+import { mapMutations } from "vuex";
+
 export default {
   name: "RafAuth",
   methods: {
-    toggleAuthModal() {
-      store.state.authModalActive = !store.state.authModalActive;
-    },
+    ...mapMutations(["toggleAuthModal"]),
   },
   computed: {
     getAuthModalActive() {

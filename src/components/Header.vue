@@ -24,14 +24,12 @@
   </header>
 </template>
 <script lang="ts">
-import store from "@/store";
+import { mapMutations } from "vuex";
 
 export default {
   name: "raf-header",
   methods: {
-    toggleAuthModal() {
-      store.state.authModalActive = !store.state.authModalActive;
-    },
+    ...mapMutations(["toggleAuthModal"]),
   },
 };
 </script>

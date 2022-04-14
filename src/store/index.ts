@@ -8,7 +8,8 @@ export default createStore({
     getAuthModalActive: (state) => state.authModalActive,
   },
   mutations: {
-    toggleAuthModal: (state) => !state.authModalActive,
+    toggleAuthModal: (state) =>
+      (state.authModalActive = !state.authModalActive),
   },
   actions: {},
   modules: {},
