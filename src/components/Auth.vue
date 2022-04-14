@@ -3,7 +3,7 @@
   <div
     class="fixed z-10 inset-0 overflow-y-auto"
     id="modal"
-    :class="{ hidden: !getAuthModalActive }"
+    :class="{ hidden: !authModalActive }"
   >
     <div
       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
@@ -155,7 +155,7 @@
   </div>
 </template>
 <script lang="ts">
-import { mapMutations, mapGetters } from "vuex";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "RafAuth",
@@ -163,7 +163,7 @@ export default {
     ...mapMutations(["toggleAuthModal"]),
   },
   computed: {
-    ...mapGetters(["getAuthModalActive"]),
+    ...mapState(["authModalActive"]),
   },
 };
 </script>
