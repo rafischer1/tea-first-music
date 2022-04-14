@@ -27,7 +27,7 @@
             <p class="text-2xl font-bold">Your Account</p>
             <!-- Modal Close Button -->
             <div
-              class="modal-close cursor-pointer z-50"
+              class="modal-close cursor-pointer z-50 hover:text-zinc-600"
               @click.prevent="toggleAuthModal"
             >
               <i class="fas fa-times"></i>
@@ -40,8 +40,8 @@
               <a
                 class="block rounded py-3 px-4 transition"
                 :class="{
-                  'hover:text-white text-white bg-blue-600': tab === 'login',
-                  'hover:text-blue-600': tab === 'register',
+                  'hover:text-white text-white bg-teal-700': tab === 'login',
+                  'hover:text-teal-700': tab === 'register',
                 }"
                 href="#"
                 @click.prevent="tab = 'login'"
@@ -52,8 +52,8 @@
               <a
                 class="block rounded py-3 px-4 transition"
                 :class="{
-                  'hover:text-white text-white bg-blue-600': tab === 'register',
-                  'hover:text-blue-600': tab === 'login',
+                  'hover:text-white text-white bg-teal-700': tab === 'register',
+                  'hover:text-teal-700': tab === 'login',
                 }"
                 href="#"
                 @click.prevent="tab = 'register'"
@@ -84,7 +84,7 @@
             </div>
             <button
               type="submit"
-              class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+              class="block w-full bg-indigo-700 text-white py-1.5 px-3 rounded transition hover:bg-indigo-600"
             >
               Submit
             </button>
@@ -156,7 +156,7 @@
             </div>
             <button
               type="submit"
-              class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+              class="block w-full bg-indigo-700 text-white py-1.5 px-3 rounded transition hover:bg-indigo-600"
             >
               Submit
             </button>

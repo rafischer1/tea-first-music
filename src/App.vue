@@ -10,24 +10,7 @@
         <!-- Icon -->
         <i class="fa fa-headphones-alt float-right text-green-400 text-xl"></i>
       </div>
-      <!-- Playlist -->
-      <ol id="playlist">
-        <li
-          class="flex justify-between items-center p-3 pl-6 cursor-pointer transition duration-300 hover:bg-gray-50"
-        >
-          <div>
-            <a href="#" class="font-bold block text-gray-600">Until Dark</a>
-            <span class="text-gray-500 text-sm">Selbyville</span>
-          </div>
-
-          <div class="text-gray-600 text-lg">
-            <span class="comments">
-              <i class="fa fa-comments text-gray-600"></i>
-              4:35
-            </span>
-          </div>
-        </li>
-      </ol>
+      <raf-playlist />
       <!-- .. end Playlist -->
     </div>
   </section>
@@ -91,7 +74,8 @@
 import RafIntro from "@/components/Introduction";
 import RafHeader from "@/components/Header";
 import RafAuth from "@/components/Auth";
+import RafPlaylist from "@/components/Playlist";
 export default {
-  components: { RafAuth, RafHeader, RafIntro },
+  components: { RafPlaylist, RafAuth, RafHeader, RafIntro },
 };
 </script>

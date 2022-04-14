@@ -1,5 +1,5 @@
 <template>
-  <header id="header" class="bg-gray-700">
+  <header id="header" class="bg-teal-700">
     <nav class="container mx-auto flex justify-start items-center py-5 px-4">
       <!-- App Name -->
       <a class="text-white font-bold uppercase text-2xl mr-4" href="#"
