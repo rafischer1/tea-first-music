@@ -209,11 +209,11 @@ export default {
       schema: {
         name: "required|min:2|max:100",
         email: "required|email",
-        age: "min:1|max:3|alpha_num|min_val:16|max_val:115",
-        password: "",
-        confirmPassword: "",
-        country: "",
-        tos: "",
+        age: "required|alpha_num|min_val:16|max_val:115",
+        password: "required",
+        confirmPassword: "required",
+        country: "required",
+        tos: "required",
       },
     };
   },
