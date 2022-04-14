@@ -77,7 +77,7 @@
 <script>
 import RafIntro from "@/components/Introduction";
 import RafHeader from "@/components/Header";
-import RafAuth from "@/components/Auth";
+import RafAuth from "@/components/auth/Auth";
 import RafPlaylist from "@/components/Playlist";
 export default {
   components: { RafPlaylist, RafAuth, RafHeader, RafIntro },

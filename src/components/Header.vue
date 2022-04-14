@@ -11,12 +11,18 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal"
-              >Login / Register</a
-            >
+            <a class="px-2 text-white" href="#">About</a>
           </li>
           <li>
             <a class="px-2 text-white" href="#">Manage</a>
+          </li>
+          <li>
+            <a
+              class="px-2 text-white float-right"
+              href="#"
+              @click.prevent="toggleAuthModal"
+              >Sign In/Sign Up</a
+            >
           </li>
         </ul>
       </div>

@@ -1,11 +1,13 @@
 <template>
   <!-- Playlist -->
   <ol id="playlist">
-    <li
-      class="flex justify-between items-center p-3 pl-6 cursor-pointer transition duration-300 hover:bg-gray-50"
-    >
-      <raf-song :artist="'Selbyville'" :title="'Until Dark'" :time="'4:25'" />
-    </li>
+    <raf-song :artist="'Selbyville'" :title="'Until Dark'" :time="'3:40'" />
+    <raf-song
+      :artist="'Applesauce'"
+      :title="'Unstoppable Death Machine'"
+      :time="'4:25'"
+    />
+    <raf-song :artist="'Graham'" :title="'Untitled 3 Part 2'" :time="'5:14'" />
   </ol>
 </template>
 
