@@ -89,33 +89,40 @@
               Submit
             </button>
           </form>
+
           <!-- Registration Form -->
-          <form v-show="tab === 'register'">
+          <vee-form v-show="tab === 'register'" :validation-schema="schema">
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
-              <input
+              <vee-field
+                name="name"
                 type="text"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Enter Name"
               />
+              <error-message class="text-red-600" name="name"></error-message>
             </div>
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
-              <input
+              <vee-field
+                name="email"
                 type="email"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Enter Email"
               />
+              <error-message class="text-red-600" name="email"></error-message>
             </div>
             <!-- Age -->
             <div class="mb-3">
               <label class="inline-block mb-2">Age</label>
-              <input
+              <vee-field
+                name="age"
                 type="number"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
               />
+              <error-message class="text-red-600" name="age"></error-message>
             </div>
             <!-- Password -->
             <div class="mb-3">
@@ -160,7 +167,7 @@
             >
               Submit
             </button>
-          </form>
+          </vee-form>
         </div>
       </div>
     </div>
@@ -168,12 +175,46 @@
 </template>
 <script lang="ts">
 import { mapMutations, mapState } from "vuex";
+import {
+  Field as VeeField,
+  Form as VeeForm,
+  defineRule,
+  ErrorMessage,
+} from "vee-validate";
+import {
+  required,
+  min,
+  max,
+  alpha_spaces as alphaspaces,
+  email,
+  alpha_num as alphanum,
+  min_value as minvalue,
+  max_value as maxvalue,
+} from "@vee-validate/rules";
 
+defineRule("required", required);
+defineRule("min", min);
+defineRule("max", max);
+defineRule("email", email);
+defineRule("alpha_spaces", alphaspaces);
+defineRule("alpha_num", alphanum);
+defineRule("max_val", maxvalue);
+defineRule("min_val", minvalue);
 export default {
   name: "RafAuth",
+  components: { VeeForm, VeeField, ErrorMessage },
   data() {
     return {
       tab: "login",
+      schema: {
+        name: "required|min:2|max:100",
+        email: "required|email",
+        age: "min:1|max:3|alpha_num|min_val:16|max_val:115",
+        password: "",
+        confirmPassword: "",
+        country: "",
+        tos: "",
+      },
     };
   },
   methods: {
