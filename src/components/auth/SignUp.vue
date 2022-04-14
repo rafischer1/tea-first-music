@@ -117,6 +117,7 @@ import {
   confirmed,
   not_one_of as excluded,
 } from "@vee-validate/rules";
+import { mapMutations } from "vuex";
 
 defineRule("required", required);
 defineRule("min", min);
@@ -145,8 +146,18 @@ export default {
     };
   },
   methods: {
-    register(values: any) {
-      console.log("REGISTER:", values);
+    ...mapMutations(["toggleAuthModal"]),
+    register(values: any, actions: any) {
+      actions.setValues({
+        name: null,
+        email: "",
+        age: "",
+        password: "",
+        confirmPassword: "",
+        country: "",
+        tos: 1,
+      });
+      this.toggleAuthModal();
     },
   },
 };

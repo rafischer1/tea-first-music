@@ -21,7 +21,7 @@
               class="px-2 text-white float-right"
               href="#"
               @click.prevent="toggleAuthModal"
-              >Sign In/Sign Up</a
+              >Sign In | Sign Up</a
             >
           </li>
         </ul>

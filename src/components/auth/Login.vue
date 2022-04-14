@@ -42,6 +42,7 @@ import {
   defineRule,
   ErrorMessage,
 } from "vee-validate";
+import { mapMutations } from "vuex";
 
 defineRule("email", email);
 defineRule("min", min);
@@ -59,8 +60,14 @@ export default {
     };
   },
   methods: {
-    login(values: any) {
+    ...mapMutations(["toggleAuthModal"]),
+    login(values: any, actions: any) {
       console.log("LOGIN:", values);
+      actions.setValues({
+        email: "",
+        password: "",
+      });
+      this.toggleAuthModal();
     },
   },
 };
