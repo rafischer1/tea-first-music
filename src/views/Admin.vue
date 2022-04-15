@@ -1,14 +1,9 @@
 <template>
-  <div class="home">
-    <h1>Music Player</h1>
-  </div>
+  <div class="text-teal-600">ADMIN</div>
 </template>
-
 <script lang="ts">
 import { defineComponent } from "vue";
-
 export default defineComponent({
-  name: "HomeView",
-  components: {},
+  name: "RafAdmin",
 });
 </script>

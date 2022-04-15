@@ -2,8 +2,8 @@
   <header id="header" class="bg-teal-700">
     <nav class="container mx-auto flex justify-start items-center py-5 px-4">
       <!-- App Name -->
-      <a class="text-white font-bold uppercase text-2xl mr-4" href="#"
-        >Tea First Music</a
+      <router-link class="text-white font-bold uppercase text-2xl mr-4" to="/"
+        >Tea First Music</router-link
       >
 
       <div class="flex flex-grow items-center">
@@ -11,10 +11,12 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <a class="px-2 text-white" href="#">About</a>
+            <router-link class="px-2 text-white" to="/about">About</router-link>
           </li>
           <li>
-            <a class="px-2 text-white" href="#">Manage</a>
+            <router-link to="/admin" class="px-2 text-white"
+              >Manage</router-link
+            >
           </li>
           <li>
             <a
