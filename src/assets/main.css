@@ -4,13 +4,13 @@ a {
 
 /* text-yellow-500 */
 a:hover {
-  color: #f59e0b;
+  color: #f78104;
   text-decoration: none;
 }
 
 .text-orange {
-  color: #f59e0b !important;
-  fill: #f59e0b !important;
+  color: #f78104 !important;
+  fill: #f78104 !important;
 }
 
 .player-scrub,
@@ -28,8 +28,8 @@ a:hover {
 
 .card-header .fa.text-orange,
 .card .card-header .fas.text-orange {
-  color: #ff5e3a;
-  fill: #ff5e3a;
+  color: #f78104;
+  fill: #f78104;
 }
 
 .introduction-bg {
@@ -44,8 +44,8 @@ a:hover {
 
 .upload-dropbox.upload-dropbox-drag {
   color: #fff;
-  background-color: #20d862;
-  border-color: #20d862;
+  background-color: #0d9488;
+  border-color: #0d9488;
   border-style: solid;
 }
 

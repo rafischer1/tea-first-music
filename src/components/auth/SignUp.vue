@@ -152,12 +152,11 @@ export default {
     ...mapMutations(["toggleAuthModal"]),
     register(values: any, actions: any) {
       actions.setValues({
-        name: null,
-        email: "",
-        age: "",
-        password: "",
-        confirmPassword: "",
-        country: "",
+        name: "Name",
+        email: "loggingin@login.com",
+        age: 22,
+        password: 1234,
+        confirmPassword: 1234,
         tos: 1,
       });
       this.showSuccess = true;
