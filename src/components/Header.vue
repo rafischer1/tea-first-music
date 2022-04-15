@@ -18,11 +18,20 @@
           </li>
           <li>
             <a
+              v-if="!authenticated && !loading"
               class="px-2 text-white float-right"
               href="#"
               @click.prevent="toggleAuthModal"
               >Sign In | Sign Up</a
             >
+            <a
+              v-else-if="authenticated && !loading"
+              class="px-2 text-white float-right"
+              href="#"
+              @click.prevent="signOut"
+              >Sign Out</a
+            >
+            <div v-else class="text-black animate-pulse">Signing Out...</div>
           </li>
         </ul>
       </div>
@@ -30,12 +39,28 @@
   </header>
 </template>
 <script lang="ts">
-import { mapMutations } from "vuex";
+import { defineComponent } from "vue";
+import { mapMutations, mapState } from "vuex";
 
-export default {
+export default defineComponent({
   name: "raf-header",
-  methods: {
-    ...mapMutations(["toggleAuthModal"]),
+  data() {
+    return {
+      loading: false,
+    };
   },
-};
+  methods: {
+    ...mapMutations(["toggleAuthModal", "toggleAuthenticated"]),
+    signOut() {
+      this.$data.loading = true;
+      setTimeout(() => {
+        this.toggleAuthenticated();
+        this.$data.loading = false;
+      }, 2000);
+    },
+  },
+  computed: {
+    ...mapState({ authenticated: "authenticated" }),
+  },
+});
 </script>

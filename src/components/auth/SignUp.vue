@@ -52,9 +52,10 @@
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         placeholder="Confirm Password"
       />
-      <error-message name="confirmPassword"
-        ><div class="text-red-600">Passwords do not match</div></error-message
-      >
+      <error-message
+        name="confirmPassword"
+        class="text-red-600"
+      ></error-message>
     </div>
     <!-- Country -->
     <div class="mb-3">
@@ -69,11 +70,7 @@
         <option value="Canada">Canada</option>
         <option value="Spain">Spain</option>
       </vee-field>
-      <error-message name="country"
-        ><div class="text-red-600">
-          'Spain' is no longer in service
-        </div></error-message
-      >
+      <error-message name="country" class="text-red-600"> </error-message>
     </div>
     <!-- TOS -->
     <div class="mb-3 pl-6">
@@ -84,11 +81,7 @@
         class="w-4 h-4 float-left -ml-6 mt-1 rounded"
       />
       <label class="inline-block">Accept terms of service</label>
-      <error-message name="tos"
-        ><div class="text-red-600">
-          Review and accept terms of service
-        </div></error-message
-      >
+      <error-message name="tos" class="text-red-600"></error-message>
     </div>
     <button
       type="submit"
@@ -101,23 +94,25 @@
   </vee-form>
 </template>
 <script lang="ts">
+import { defineComponent } from "vue";
 import {
-  Field as VeeField,
-  Form as VeeForm,
+  configure,
   defineRule,
   ErrorMessage,
+  Field as VeeField,
+  Form as VeeForm,
 } from "vee-validate";
 import {
-  required,
-  min,
-  max,
-  alpha_spaces as alphaspaces,
-  email,
   alpha_num as alphanum,
-  min_value as minvalue,
-  max_value as maxvalue,
+  alpha_spaces as alphaspaces,
   confirmed,
+  email,
+  max,
+  max_value as maxvalue,
+  min,
+  min_value as minvalue,
   not_one_of as excluded,
+  required,
 } from "@vee-validate/rules";
 import { mapMutations } from "vuex";
 
@@ -125,13 +120,33 @@ defineRule("required", required);
 defineRule("min", min);
 defineRule("max", max);
 defineRule("email", email);
-defineRule("alpha_spaces", alphaspaces);
 defineRule("alpha_num", alphanum);
 defineRule("max_val", maxvalue);
 defineRule("min_val", minvalue);
 defineRule("confirmed", confirmed);
 defineRule("excluded", excluded);
-export default {
+
+configure({
+  generateMessage: (ctx) => {
+    const messages: { [key: string]: string } = {
+      required: `${ctx.field} is required`,
+      min: `${ctx.field} does not meet min characters`,
+      max: `${ctx.field} exceeds max characters`,
+      min_val: `Must be 16+ to register`,
+      max_val: `${ctx.field} exceeds max value`,
+      email: `Incorrect email format`,
+      alpha_num: `Input must be a number`,
+      excluded: `Select value: ${ctx.value} currently unavailable for registration`,
+      confirmed: "Retry: Passwords do not match",
+    };
+    return ctx.rule?.name ? messages[ctx.rule?.name] : "";
+  },
+  validateOnBlur: true,
+  validateOnChange: true,
+  validateOnInput: true,
+});
+
+export default defineComponent({
   name: "RafSignUp",
   components: { VeeForm, VeeField, ErrorMessage },
   data() {
@@ -149,7 +164,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["toggleAuthModal"]),
+    ...mapMutations(["toggleAuthModal", "toggleAuthenticated"]),
     register(values: any, actions: any) {
       actions.setValues({
         name: "Name",
@@ -159,12 +174,13 @@ export default {
         confirmPassword: 1234,
         tos: 1,
       });
-      this.showSuccess = true;
+      this.$data.showSuccess = true;
       setTimeout(() => {
         this.toggleAuthModal();
-        this.showSuccess = false;
+        this.toggleAuthenticated();
+        this.$data.showSuccess = false;
       }, 1500);
     },
   },
-};
+});
 </script>

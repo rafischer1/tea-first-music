@@ -9,9 +9,7 @@
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         placeholder="Enter Email"
       />
-      <error-message name="email"
-        ><div class="text-red-600">Invalid Email</div></error-message
-      >
+      <error-message name="email" class="text-red-600"></error-message>
     </div>
     <!-- Password -->
     <div class="mb-3">
@@ -22,9 +20,7 @@
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         placeholder="Password"
       />
-      <error-message name="password"
-        ><div class="text-red-600">Invalid Password</div></error-message
-      >
+      <error-message name="password" class="text-red-600"></error-message>
     </div>
     <button
       type="submit"
@@ -37,12 +33,14 @@
   </vee-login-form>
 </template>
 <script lang="ts">
+import { defineComponent } from "vue";
 import { email, min, max, required } from "@vee-validate/rules";
 import {
   Field as VeeLoginField,
   Form as VeeLoginForm,
   defineRule,
   ErrorMessage,
+  configure,
 } from "vee-validate";
 import { mapMutations } from "vuex";
 
@@ -50,7 +48,23 @@ defineRule("email", email);
 defineRule("min", min);
 defineRule("max", max);
 defineRule("required", required);
-export default {
+
+configure({
+  generateMessage: (ctx) => {
+    const messages: { [key: string]: string } = {
+      required: `${ctx.field} is required`,
+      min: `${ctx.field} does not meet min characters`,
+      max: `${ctx.field} exceeds max characters`,
+      email: `Incorrect email format`,
+    };
+    return ctx.rule?.name ? messages[ctx.rule?.name] : "";
+  },
+  validateOnBlur: true,
+  validateOnChange: true,
+  validateOnInput: false,
+});
+
+export default defineComponent({
   name: "RafLogin",
   components: { VeeLoginForm, VeeLoginField, ErrorMessage },
   data() {
@@ -63,19 +77,20 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["toggleAuthModal"]),
+    ...mapMutations(["toggleAuthModal", "toggleAuthenticated"]),
     login(values: any, actions: any) {
       console.log("LOGIN:", values);
       actions.setValues({
         email: "",
         password: "",
       });
-      this.showSuccess = true;
+      this.$data.showSuccess = true;
       setTimeout(() => {
         this.toggleAuthModal();
-        this.showSuccess = false;
+        this.toggleAuthenticated();
+        this.$data.showSuccess = false;
       }, 1500);
     },
   },
-};
+});
 </script>
