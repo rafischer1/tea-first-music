@@ -43,6 +43,7 @@ import {
   configure,
 } from "vee-validate";
 import { mapMutations } from "vuex";
+import LogInService from "@/shared/log-in.service";
 
 defineRule("email", email);
 defineRule("min", min);
@@ -77,7 +78,7 @@ export default defineComponent({
     };
   },
   methods: {
-    ...mapMutations(["toggleAuthModal", "toggleAuthenticated"]),
+    ...mapMutations(["toggleAuthModal", "toggleAuthenticated", "toggleAdmin"]),
     login(values: any, actions: any) {
       console.log("LOGIN:", values);
       actions.setValues({
@@ -86,6 +87,9 @@ export default defineComponent({
       });
       this.$data.showSuccess = true;
       setTimeout(() => {
+        if (LogInService.checkAdminPassword(values.password)) {
+          this.toggleAdmin();
+        }
         this.toggleAuthModal();
         this.toggleAuthenticated();
         this.$data.showSuccess = false;
