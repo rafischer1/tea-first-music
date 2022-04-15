@@ -9,7 +9,10 @@ yarn build
 yarn test:unit
 yarn test:e2e
 yarn lint
+
+vue ui
 ```
 
 ## 🤺 Documentation Links
  - [Tailwind Docs](https://tailwindcss.com/docs/installation)
+ - [Vee Validate](https://vee-validate.logaretm.com/v4/)
