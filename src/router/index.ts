@@ -19,11 +19,18 @@ const routes: Array<RouteRecordRaw> = [
     name: "admin",
     component: Admin,
   },
+  { path: "/:catchAll(.*)*", redirect: { name: "home" } },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  linkExactActiveClass: "text-orange-400",
 });
+
+// router.beforeEach((to, from, next) => {
+//   console.log(to, from);
+//   next();
+// });
 
 export default router;

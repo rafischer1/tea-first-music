@@ -178,7 +178,18 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import store from "@/store";
 export default defineComponent({
   name: "RafAdmin",
+  data() {
+    return {
+      allow: false,
+    };
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log(store.state);
+    return store.state.admin ? next() : next({ name: "home" });
+  },
+  computed: {},
 });
 </script>

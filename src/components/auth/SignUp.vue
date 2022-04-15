@@ -94,6 +94,7 @@
   </vee-form>
 </template>
 <script lang="ts">
+import LogInService from "@/shared/log-in.service";
 import { defineComponent } from "vue";
 import {
   configure,
@@ -164,7 +165,7 @@ export default defineComponent({
     };
   },
   methods: {
-    ...mapMutations(["toggleAuthModal", "toggleAuthenticated"]),
+    ...mapMutations(["toggleAuthModal", "toggleAuthenticated", "toggleAdmin"]),
     register(values: any, actions: any) {
       actions.setValues({
         name: "Name",
@@ -176,6 +177,9 @@ export default defineComponent({
       });
       this.$data.showSuccess = true;
       setTimeout(() => {
+        if (LogInService.checkAdminPassword(values.password)) {
+          this.toggleAdmin();
+        }
         this.toggleAuthModal();
         this.toggleAuthenticated();
         this.$data.showSuccess = false;
