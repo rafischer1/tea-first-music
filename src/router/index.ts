@@ -28,9 +28,4 @@ const router = createRouter({
   linkExactActiveClass: "text-orange-400",
 });
 
-// router.beforeEach((to, from, next) => {
-//   console.log(to, from);
-//   next();
-// });
-
 export default router;
