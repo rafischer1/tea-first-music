@@ -43,8 +43,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { storage } from "@/includes/firebase";
+import { storage, songsCollection } from "@/includes/firebase";
 import UploadSong from "@/interfaces/upload-song.interface";
+import Track from "@/interfaces/song.interface";
 
 export default defineComponent({
   name: "RafUpload",
@@ -56,16 +57,20 @@ export default defineComponent({
   },
   methods: {
     upload(ev: DragEvent) {
+      // capture files and check type
       const dropFiles = ev?.dataTransfer?.files;
       if (dropFiles) {
-        console.log(dropFiles);
         Object.values(dropFiles).forEach((file) => {
           if (file.type !== "audio/mpeg") {
             return;
           }
+          // db ref
           const storageRef = storage.ref();
+          // directory ref
           const songsRef = storageRef.child(`songs/${file.name}`);
+          // init task
           const task = songsRef.put(file);
+          // push new upload on and find index
           const uploadIndex =
             this.uploads.push({
               task,
@@ -75,28 +80,42 @@ export default defineComponent({
               icon: "fas fa-spinner fa-spin",
               text_class: "",
             }) - 1;
-
+          const currentUpload = this.uploads[uploadIndex];
+          // listen to task execution
           task.on(
             "state_changed",
             (snapshot) => {
-              this.uploads[uploadIndex].current_progress =
+              currentUpload.current_progress =
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             },
             (error) => {
-              this.uploads[uploadIndex].variant = "bg-red-400";
-              this.uploads[uploadIndex].icon = "fas fa-times";
-              this.uploads[uploadIndex].text_class = "text-red-400";
+              currentUpload.variant = "bg-red-400";
+              currentUpload.icon = "fas fa-times";
+              currentUpload.text_class = "text-red-400";
               console.log(error);
             },
-            () => {
-              this.uploads[uploadIndex].variant = "bg-zinc-600";
-              this.uploads[uploadIndex].icon = "fas fa-check";
-              this.uploads[uploadIndex].text_class = "text-teal-600";
-              console.log("COMPLETE!");
+            async () => {
+              // create new track for db
+              const song: Track = {
+                userDisplayName: "Artie",
+                originalName: task.snapshot.ref.name,
+                modifiedName: task.snapshot.ref.name,
+                comment_count: 0,
+                genre: "",
+                uid: "123456",
+                url: "",
+              };
+              song.url = await task.snapshot.ref.getDownloadURL();
+              await songsCollection.add(song);
+              // toggle css for completion
+              currentUpload.variant = "bg-zinc-600";
+              currentUpload.icon = "fas fa-check";
+              currentUpload.text_class = "text-teal-600";
             }
           );
         });
       }
+      // reset drop box style
       this.is_dragover = false;
     },
   },
