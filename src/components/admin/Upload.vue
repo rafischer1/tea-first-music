@@ -92,7 +92,6 @@ export default defineComponent({
               currentUpload.variant = "bg-red-400";
               currentUpload.icon = "fas fa-times";
               currentUpload.text_class = "text-red-400";
-              console.log(error);
             },
             async () => {
               // create new track for db
