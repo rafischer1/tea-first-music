@@ -7,6 +7,7 @@ type Track = {
   genre: string;
   comment_count: number;
   url: any;
+  docId?: string;
 };
 
 export default Track;

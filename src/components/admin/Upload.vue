@@ -118,5 +118,16 @@ export default defineComponent({
       this.is_dragover = false;
     },
   },
+  beforeUnmount() {
+    this.uploads.forEach((upload, i) => {
+      upload.task.cancel();
+      if (i === this.uploads.length - 1) {
+        console.log(
+          "%c Uploads canceled - Please Retry",
+          "color: red; font-size: 14px"
+        );
+      }
+    });
+  },
 });
 </script>
