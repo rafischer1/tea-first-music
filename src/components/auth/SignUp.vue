@@ -105,7 +105,6 @@ import {
 } from "vee-validate";
 import {
   alpha_num as alphanum,
-  alpha_spaces as alphaspaces,
   confirmed,
   email,
   max,

@@ -26,14 +26,14 @@
           <li>
             <a
               v-if="!authenticated && !loading"
-              class="px-2 text-white fixed right-10"
+              class="px-2 text-white absolute right-10"
               href="#"
               @click.prevent="toggleAuthModal"
               >Sign In | Sign Up</a
             >
             <a
               v-else-if="authenticated && !loading"
-              class="px-2 text-white fixed right-10"
+              class="px-2 text-white absolute right-10"
               href="#"
               @click.prevent="signOut"
               >Sign Out</a

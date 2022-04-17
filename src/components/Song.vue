@@ -3,25 +3,27 @@
     class="flex justify-between items-center p-3 pl-6 cursor-pointer transition duration-300 hover:bg-gray-50"
   >
     <div>
-      <a href="#" class="font-bold block text-zinc-700">{{ title }}</a>
-      <span class="text-zinc-600 text-md">{{ artist }}</span>
+      <a href="#" class="font-bold block text-zinc-700" @click.prevent.stop>{{
+        title
+      }}</a>
     </div>
 
     <div class="text-zinc-700 text-lg">
       <span class="comments">
-        {{ time }}
+        {{ commentCount }}
       </span>
     </div>
   </li>
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   props: {
     title: String,
-    artist: String,
-    time: String,
+    commentCount: String,
   },
   name: "RafSong",
-};
+});
 </script>

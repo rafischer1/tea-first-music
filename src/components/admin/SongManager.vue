@@ -2,15 +2,18 @@
   <div class="col-span-2">
     <div class="bg-white rounded border border-gray-200 relative flex flex-col">
       <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
-        <span class="card-title">My Songs</span>
+        <span class="card-title">Tracks</span>
         <i class="fa fa-compact-disc float-right text-teal-600 text-2xl"></i>
       </div>
       <div class="p-6">
         <!-- Composition Items -->
         <raf-comp-item
-          v-for="track in tracks"
+          v-for="(track, i) in tracks"
           :key="track.docId"
           :track="track"
+          :index="i"
+          :updateTrack="updateTrack"
+          :removeTrack="removeTrack"
         />
       </div>
     </div>
@@ -47,6 +50,15 @@ export default defineComponent({
       };
       this.tracks.push(track);
     });
+  },
+  methods: {
+    updateTrack(i: number, values: { modifiedName: string; genre: string }) {
+      this.tracks[i].modifiedName = values.modifiedName;
+      this.tracks[i].genre = values.genre;
+    },
+    removeTrack(i: number) {
+      this.tracks.splice(i, 1);
+    },
   },
 });
 </script>
