@@ -2,128 +2,64 @@
   <div class="col-span-2">
     <div class="bg-white rounded border border-gray-200 relative flex flex-col">
       <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
-        <span class="card-title">My Songs</span>
+        <span class="card-title">Tracks</span>
         <i class="fa fa-compact-disc float-right text-teal-600 text-2xl"></i>
       </div>
       <div class="p-6">
         <!-- Composition Items -->
-        <div class="border border-gray-200 p-3 mb-4 rounded">
-          <div>
-            <h4 class="inline-block text-2xl font-bold">Song Name</h4>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
-            >
-              <i class="fa fa-times"></i>
-            </button>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right"
-            >
-              <i class="fa fa-pencil-alt"></i>
-            </button>
-          </div>
-          <div>
-            <form>
-              <div class="mb-3">
-                <label class="inline-block mb-2">Song Title</label>
-                <input
-                  type="text"
-                  class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
-                  placeholder="Enter Song Title"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="inline-block mb-2">Genre</label>
-                <input
-                  type="text"
-                  class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
-                  placeholder="Enter Genre"
-                />
-              </div>
-              <button
-                type="submit"
-                class="py-1.5 px-3 rounded text-white bg-teal-600"
-              >
-                Submit
-              </button>
-              <button
-                type="button"
-                class="py-1.5 px-3 rounded text-white bg-zinc-700 ml-3"
-              >
-                Go Back
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="border border-gray-200 p-3 mb-4 rounded">
-          <div>
-            <h4 class="inline-block text-2xl font-bold">Song Name</h4>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
-            >
-              <i class="fa fa-times"></i>
-            </button>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right"
-            >
-              <i class="fa fa-pencil-alt"></i>
-            </button>
-          </div>
-        </div>
-        <div class="border border-gray-200 p-3 mb-4 rounded">
-          <div>
-            <h4 class="inline-block text-2xl font-bold">Song Name</h4>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
-            >
-              <i class="fa fa-times"></i>
-            </button>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right"
-            >
-              <i class="fa fa-pencil-alt"></i>
-            </button>
-          </div>
-        </div>
-        <div class="border border-gray-200 p-3 mb-4 rounded">
-          <div>
-            <h4 class="inline-block text-2xl font-bold">Song Name</h4>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
-            >
-              <i class="fa fa-times"></i>
-            </button>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right"
-            >
-              <i class="fa fa-pencil-alt"></i>
-            </button>
-          </div>
-        </div>
-        <div class="border border-gray-200 p-3 mb-4 rounded">
-          <div>
-            <h4 class="inline-block text-2xl font-bold">Song Name</h4>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
-            >
-              <i class="fa fa-times"></i>
-            </button>
-            <button
-              class="ml-1 py-1 px-2 text-sm rounded text-white bg-blue-600 float-right"
-            >
-              <i class="fa fa-pencil-alt"></i>
-            </button>
-          </div>
-        </div>
+        <raf-comp-item
+          v-for="(track, i) in tracks"
+          :key="track.docId"
+          :track="track"
+          :index="i"
+          :updateTrack="updateTrack"
+          :removeTrack="removeTrack"
+        />
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
+import { songsCollection } from "@/includes/firebase";
+import Track from "@/interfaces/song.interface";
+import RafCompItem from "@/components/admin/CompositionItem.vue";
 
 export default defineComponent({
   name: "RafSongManager",
+  components: { RafCompItem },
+  data() {
+    return {
+      hi: false,
+      tracks: [] as Track[],
+    };
+  },
+  async created() {
+    const snapshots = await songsCollection.where("uid", "==", "123456").get();
+    snapshots.forEach((document) => {
+      const track: Track = {
+        uid: document.data().uid,
+        userDisplayName: document.data().userDisplayName,
+        originalName: document.data().originalName,
+        modifiedName: document.data().modifiedName,
+        genre: document.data().genre,
+        comment_count: document.data().comment_count ?? 0,
+        url: document.data().url,
+        docId: document.id,
+      };
+      this.tracks.push(track);
+    });
+  },
+  methods: {
+    updateTrack(i: number, values: { modifiedName: string; genre: string }) {
+      this.tracks[i].modifiedName = values.modifiedName;
+      this.tracks[i].genre = values.genre;
+    },
+    removeTrack(i: number) {
+      this.tracks.splice(i, 1);
+    },
+  },
 });
 </script>
 
