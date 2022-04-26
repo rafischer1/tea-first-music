@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import About from "@/views/About.vue";
 import Admin from "@/views/Admin.vue";
 import Home from "@/views/Home.vue";
+import ViewTrack from "@/views/ViewTrack.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -19,6 +20,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "admin",
     component: Admin,
   },
+  { name: "track", path: "/track/:id", component: ViewTrack },
   { path: "/:catchAll(.*)*", redirect: { name: "home" } },
 ];
 
