@@ -8,7 +8,7 @@
       <!-- Play/Pause Button -->
       <button
         type="button"
-        class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none"
+        class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none hover:text-teal-800 hover:border-2 hover:border-teal-800 active:text-teal-600 active:border-2 active:border-teal-600"
       >
         <i class="fas fa-play"></i>
       </button>
@@ -25,7 +25,7 @@
       <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
         <!-- Comment Count -->
         <span class="card-title">Comments {{ track?.comment_count }}</span>
-        <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
+        <i class="fa fa-comments float-right text-teal-600 text-2xl"></i>
       </div>
       <div class="p-6">
         <form>
