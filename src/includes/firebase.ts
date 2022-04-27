@@ -18,5 +18,6 @@ const storage = firebase.storage();
 const db = firebase.firestore();
 
 const songsCollection = db.collection("songs");
+const commentsCollection = db.collection("comments");
 
-export { storage, songsCollection, db };
+export { storage, songsCollection, db, commentsCollection };
