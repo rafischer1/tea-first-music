@@ -11,11 +11,12 @@
         @click.prevent.stop="play"
         :class="{
           'bg-zinc-800 text-orange-400 border-2 border-orange-400 hover:text-orange-400 hover:border-orange-400':
-            activePlay,
+            playing,
         }"
         class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none hover:text-teal-800 hover:border-2 hover:border-teal-800 active:text-teal-600 active:border-2 active:border-teal-600"
       >
-        <i class="fas fa-play"></i>
+        <i v-if="!playing" class="fas fa-play"></i>
+        <i v-else class="fas fa-stop"></i>
       </button>
       <div class="z-50 text-left ml-8">
         <!-- Song Info -->
@@ -51,11 +52,14 @@ import RafComment from "@/components/Comment.vue";
 import { songsCollection, commentsCollection } from "@/includes/firebase";
 import Track from "@/interfaces/song.interface";
 import CommentForm from "@/components/CommentForm.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default defineComponent({
   name: "ViewTrack",
   components: { CommentForm, RafComment },
+  computed: {
+    ...mapGetters(["playing"]),
+  },
   data() {
     return {
       comments: [] as {
@@ -85,20 +89,21 @@ export default defineComponent({
     }
   },
   methods: {
-    ...mapActions(["newTrackAction", "stopPlaybackAction"]),
+    ...mapActions(["newTrackAction", "stopPlaybackAction", "progress"]),
     play() {
       this.toggleActivePlay();
       if (this.activePlay) {
         this.newTrackAction({ url: this.track.url });
+        this.progress();
       } else {
         this.stopPlaybackAction();
+        this.progress();
       }
     },
     toggleActivePlay() {
       this.activePlay = !this.activePlay;
     },
     commentSubmitted() {
-      console.log("emit called");
       this.getComments();
     },
     async getComments() {
