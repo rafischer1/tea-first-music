@@ -14,9 +14,9 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <router-link class="px-2 text-white" :to="{ name: 'about' }"
-              >About</router-link
-            >
+            <router-link class="px-2 text-white" :to="{ name: 'about' }">{{
+              $t("header.about")
+            }}</router-link>
           </li>
           <li v-if="admin">
             <router-link :to="{ name: 'admin' }" class="px-2 text-white"

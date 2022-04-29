@@ -21,6 +21,7 @@
 import { defineComponent } from "vue";
 import RafIntro from "@/components/Introduction.vue";
 import RafPlaylist from "@/components/Playlist.vue";
+import { mapState } from "vuex";
 
 export default defineComponent({
   name: "HomeView",
@@ -29,6 +30,12 @@ export default defineComponent({
     return {
       headphonesIcon: "headphones-alt",
     };
+  },
+  computed: {
+    ...mapState(["locale"]),
+  },
+  updated() {
+    this.$i18n.locale = this.locale;
   },
 });
 </script>
