@@ -11,7 +11,6 @@ const vuexLocal = new VuexPersistence<any>({
       admin: state.admin,
       authenticated: state.authenticated,
       authModalActive: state.authModalActive,
-      locale: state.locale,
     };
   },
 });
@@ -51,8 +50,9 @@ export default createStore({
       const duration = state.sound?.duration() ?? 0;
       state.playerProgress = `${(seek / duration) * 100}%`;
     },
-    updateLocale: (state, payload: { selected: "en" | "es" | "de" }) =>
-      (state.locale = payload.selected),
+    updateLocale: (state, payload: { selected: "en" | "es" | "de" }) => {
+      state.locale = payload.selected;
+    },
   },
   actions: {
     async newTrackAction(

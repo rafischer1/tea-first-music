@@ -42,7 +42,7 @@
               <div class="animate-spin h-5 w-5 mr-3 text-xl">🌀</div>
             </div>
           </li>
-          <li class="float-right fixed right-5">
+          <li class="float-right absolute right-5">
             <div class="border-2 rounded-md border-white">
               <a
                 @click.prevent="selectLocale('en')"
@@ -100,7 +100,6 @@ export default defineComponent({
       }
     },
     signOut() {
-      console.log("SIGN OUT CALLED");
       this.$data.loading = true;
       setTimeout(() => {
         this.toggleAuthenticated();
