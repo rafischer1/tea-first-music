@@ -89,15 +89,16 @@ export default defineComponent({
     }
   },
   methods: {
-    ...mapActions(["newTrackAction", "stopPlaybackAction", "progress"]),
+    ...mapActions(["newTrackAction", "stopPlaybackAction"]),
     play() {
       this.toggleActivePlay();
       if (this.activePlay) {
-        this.newTrackAction({ url: this.track.url });
-        this.progress();
+        this.newTrackAction({
+          url: this.track.url,
+          title: this.track.modifiedName,
+        });
       } else {
         this.stopPlaybackAction();
-        this.progress();
       }
     },
     toggleActivePlay() {
