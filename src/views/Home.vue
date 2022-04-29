@@ -8,10 +8,11 @@
       >
         <div
           class="px-6 pt-6 pb-5 font-bold border-b border-gray-200 bg-white/[.95]"
+          v-icon
         >
           <span class="card-title">Tea First Selections</span>
           <!-- Icon -->
-          <i class="fa fa-headphones-alt float-right text-teal-600 text-xl"></i>
+          <!--          <i class="fa fa-headphones-alt float-right text-teal-600 text-xl"></i>-->
         </div>
         <raf-playlist />
         <!-- .. end Playlist -->
