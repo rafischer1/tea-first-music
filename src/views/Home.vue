@@ -9,7 +9,7 @@
           class="px-6 pt-6 pb-5 font-bold border-b border-gray-200 bg-white/[.95]"
           v-icon.right.teal.xl="headphonesIcon"
         >
-          <span class="card-title">Tea First Selections</span>
+          <span class="card-title">{{ $t("home.title") }}</span>
         </div>
         <raf-playlist />
       </div>
