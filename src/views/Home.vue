@@ -1,21 +1,23 @@
 <template>
-  <raf-intro />
-  <!-- Main Content -->
-  <section class="container mx-auto">
-    <div
-      class="bg-white/[.9] rounded border border-gray-200 relative flex flex-col mt-24"
-    >
+  <main>
+    <raf-intro />
+    <!-- Main Content -->
+    <section class="container mx-auto">
       <div
-        class="px-6 pt-6 pb-5 font-bold border-b border-gray-200 bg-white/[.95]"
+        class="bg-white/[.9] rounded border border-gray-200 relative flex flex-col mt-24"
       >
-        <span class="card-title">Tea First Selections</span>
-        <!-- Icon -->
-        <i class="fa fa-headphones-alt float-right text-teal-600 text-xl"></i>
+        <div
+          class="px-6 pt-6 pb-5 font-bold border-b border-gray-200 bg-white/[.95]"
+        >
+          <span class="card-title">Tea First Selections</span>
+          <!-- Icon -->
+          <i class="fa fa-headphones-alt float-right text-teal-600 text-xl"></i>
+        </div>
+        <raf-playlist />
+        <!-- .. end Playlist -->
       </div>
-      <raf-playlist />
-      <!-- .. end Playlist -->
-    </div>
-  </section>
+    </section>
+  </main>
 </template>
 
 <script lang="ts">

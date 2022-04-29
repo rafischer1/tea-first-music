@@ -1,5 +1,5 @@
 <template>
-  <header id="header" class="bg-teal-700">
+  <header id="header" class="bg-teal-700 static">
     <nav class="container mx-auto flex justify-start items-center py-5 px-4">
       <!-- App Name -->
       <router-link

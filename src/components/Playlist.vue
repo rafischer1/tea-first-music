@@ -6,7 +6,6 @@
       :key="track.docId"
       :title="track.modifiedName"
       :track-id="track.docId"
-      :comment-count="track.comment_count"
       :index="i"
     />
   </ol>

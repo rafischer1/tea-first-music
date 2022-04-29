@@ -95,8 +95,11 @@ export default createStore({
         });
       }
     },
-    updateSeek({ state, dispatch }, payload) {
-      if (!state.sound?.playing) {
+    updateSeek(
+      { state, dispatch },
+      payload: { currentTarget: any; clientX: number }
+    ) {
+      if (!state.sound?.playing()) {
         return;
       }
 
@@ -104,9 +107,10 @@ export default createStore({
       // Document = 2000, Timeline = 1000, Click = 500, Distance = 500
       const clickX = payload.clientX - x;
       const percentage = clickX / width;
-      const seconds = state.sound?.duration() * percentage;
+      const duration = state.sound?.duration() ?? 0;
+      const seconds = duration * percentage;
 
-      state.sound.seek(seconds);
+      state.sound?.seek(seconds);
 
       state.sound.once("seek", () => {
         dispatch("progress");

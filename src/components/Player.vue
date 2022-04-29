@@ -7,7 +7,7 @@
       <div class="float-left w-7 h-7 leading-3 flex">
         <button type="button" @click.prevent="playPause">
           <i
-            class="fa text-zinc-500 text-xl fa-pause"
+            class="fa text-zinc-500 text-xl fa-pause hover:text-teal-600"
             :class="{ 'fa-play': !playing }"
           ></i>
         </button>
@@ -17,7 +17,9 @@
           :disabled="!playing"
           class="ml-3 mr-3"
         >
-          <i class="fa text-zinc-500 text-xl fa-stop"></i>
+          <i
+            class="fa text-zinc-500 text-xl fa-stop hover:text-zinc-800 cursor-pointer"
+          ></i>
         </button>
       </div>
       <!-- Current Position -->
@@ -37,6 +39,7 @@
         <!-- Scrub Container  -->
         <span
           class="block w-full h-2 rounded m-1 mt-2 bg-zinc-200 relative cursor-pointer"
+          @click.prevent="updateSeek"
         >
           <!-- Player Ball -->
           <span
@@ -73,7 +76,7 @@ export default defineComponent({
     ...mapGetters(["playing"]),
   },
   methods: {
-    ...mapActions(["toggleAudio", "stopAudio", "progress"]),
+    ...mapActions(["toggleAudio", "stopAudio", "progress", "updateSeek"]),
     playPause() {
       this.toggleAudio();
       this.progress();
