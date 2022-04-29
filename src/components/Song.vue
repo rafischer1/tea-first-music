@@ -10,12 +10,6 @@
         >{{ title }}</router-link
       >
     </div>
-
-    <div class="text-zinc-700 text-lg">
-      <span class="comments">
-        {{ commentCount }}
-      </span>
-    </div>
   </li>
 </template>
 
@@ -25,7 +19,6 @@ import { defineComponent } from "vue";
 export default defineComponent({
   props: {
     title: String,
-    commentCount: String,
     trackId: String,
   },
   name: "RafSong",
