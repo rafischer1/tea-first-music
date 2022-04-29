@@ -17,3 +17,4 @@ vue ui
  - [Tailwind Docs](https://tailwindcss.com/docs/installation)
  - [Vee Validate](https://vee-validate.logaretm.com/v4/)
  - [Vue Router](https://router.vuejs.org/api/#to)
+ - [Vue i18n](https://kazupon.github.io/vue-i18n/)

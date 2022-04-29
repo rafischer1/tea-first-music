@@ -25,6 +25,7 @@ export default createStore({
     seek: undefined as string | undefined,
     duration: undefined as string | undefined,
     playerProgress: "0%",
+    locale: "en" as "en" | "es" | "de",
   },
   getters: {
     // getAuthModalActive: (state) => state.authModalActive,
@@ -48,6 +49,9 @@ export default createStore({
       const seek = state.sound?.seek() ?? 0;
       const duration = state.sound?.duration() ?? 0;
       state.playerProgress = `${(seek / duration) * 100}%`;
+    },
+    updateLocale: (state, payload: { selected: "en" | "es" | "de" }) => {
+      state.locale = payload.selected;
     },
   },
   actions: {

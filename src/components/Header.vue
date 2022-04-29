@@ -14,9 +14,9 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <router-link class="px-2 text-white" :to="{ name: 'about' }"
-              >About</router-link
-            >
+            <router-link class="px-2 text-white" :to="{ name: 'about' }">{{
+              $t("header.about")
+            }}</router-link>
           </li>
           <li v-if="admin">
             <router-link :to="{ name: 'admin' }" class="px-2 text-white"
@@ -26,20 +26,42 @@
           <li>
             <a
               v-if="!authenticated && !loading"
-              class="px-2 text-white absolute right-10"
+              class="px-2 text-white absolute right-40"
               href="#"
               @click.prevent="toggleAuthModal"
               >Sign In | Sign Up</a
             >
             <a
               v-else-if="authenticated && !loading"
-              class="px-2 text-white absolute right-10"
+              class="px-2 text-white absolute right-40"
               href="#"
               @click.prevent="signOut"
               >Sign Out</a
             >
             <div v-else class="text-black fixed right-10">
               <div class="animate-spin h-5 w-5 mr-3 text-xl">🌀</div>
+            </div>
+          </li>
+          <li class="float-right absolute right-5">
+            <div class="border-2 rounded-md border-white">
+              <a
+                @click.prevent="selectLocale('en')"
+                class="px-2 text-white cursor-pointer"
+                :class="{ 'text-orange-500': locale === 'en' }"
+                >EN</a
+              >
+              <a
+                @click.prevent="selectLocale('es')"
+                class="px-2 text-white cursor-pointer"
+                :class="{ 'text-orange-500': locale === 'es' }"
+                >ES</a
+              >
+              <a
+                @click.prevent="selectLocale('de')"
+                class="px-2 text-white cursor-pointer"
+                :class="{ 'text-orange-500': locale === 'de' }"
+                >DE</a
+              >
             </div>
           </li>
         </ul>
@@ -60,9 +82,24 @@ export default defineComponent({
     };
   },
   methods: {
-    ...mapMutations(["toggleAuthModal", "toggleAuthenticated", "toggleAdmin"]),
+    ...mapMutations([
+      "toggleAuthModal",
+      "toggleAuthenticated",
+      "toggleAdmin",
+      "updateLocale",
+    ]),
+    selectLocale(selected: "en" | "es" | "de") {
+      if (selected !== this.$i18n.locale) {
+        this.$i18n.locale = selected;
+        this.updateLocale({ selected });
+      } else {
+        console.log(
+          "%c" + selected.toUpperCase() + " already set as locale!",
+          "color: teal; background: white; padding: 4px; border-radius: 50px;"
+        );
+      }
+    },
     signOut() {
-      console.log("SIGN OUT CALLED");
       this.$data.loading = true;
       setTimeout(() => {
         this.toggleAuthenticated();
@@ -75,7 +112,11 @@ export default defineComponent({
     },
   },
   computed: {
-    ...mapState({ authenticated: "authenticated", admin: "admin" }),
+    ...mapState({
+      authenticated: "authenticated",
+      admin: "admin",
+      locale: "locale",
+    }),
   },
 });
 </script>

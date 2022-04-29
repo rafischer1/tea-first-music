@@ -7,23 +7,11 @@ export default {
       ? (iconClass = binding.value)
       : (iconClass = `fa fa-${binding.value}`);
 
-    binding.modifiers
-      ? binding.modifiers.right
-        ? (iconClass += " float-right ")
-        : iconClass
-      : iconClass;
-
-    binding.modifiers
-      ? binding.modifiers.teal
-        ? (iconClass += " text-teal-600 ")
-        : iconClass
-      : iconClass;
-
-    binding.modifiers
-      ? binding.modifiers.xl
-        ? (iconClass += " text-xl ")
-        : iconClass
-      : iconClass;
+    if (binding.modifiers) {
+      binding.modifiers.right ? (iconClass += " float-right ") : iconClass;
+      binding.modifiers.teal ? (iconClass += " text-teal-600 ") : iconClass;
+      binding.modifiers.xl ? (iconClass += " text-xl ") : iconClass;
+    }
 
     el.innerHTML += `<i class="${iconClass}"></i>`;
   },
