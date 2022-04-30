@@ -72,7 +72,7 @@ import { mapActions, mapGetters, mapState } from "vuex";
 export default defineComponent({
   name: "RafPlayer",
   computed: {
-    ...mapState(["duration", "seek", "playerProgress", "currentSong"]),
+    ...mapState(["seek", "duration", "playerProgress", "currentSong"]),
     ...mapGetters(["playing"]),
   },
   methods: {

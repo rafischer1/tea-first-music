@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 import VuexPersistence from "vuex-persist";
 import { Howl } from "howler";
 import helper from "@/includes/helper";
+import auth from "./modules/auth.module";
 
 const vuexLocal = new VuexPersistence<any>({
   key: "VueMusic",
@@ -16,10 +17,9 @@ const vuexLocal = new VuexPersistence<any>({
 });
 
 export default createStore({
+  modules: { auth },
   state: {
-    authModalActive: false,
-    authenticated: false,
-    admin: false,
+    ...auth.state,
     currentSong: null as null | { url: string; title: string },
     sound: null as Howl | null,
     seek: undefined as string | undefined,
@@ -32,11 +32,7 @@ export default createStore({
     playing: (state) => state.sound?.playing(),
   },
   mutations: {
-    toggleAuthModal: (state) =>
-      (state.authModalActive = !state.authModalActive),
-    toggleAuthenticated: (state) =>
-      (state.authenticated = !state.authenticated),
-    toggleAdmin: (state) => (state.admin = !state.admin),
+    ...auth.mutations,
     newTrack: (state, payload: { url: string; title: string }) => {
       state.playerProgress = "0%";
       state.currentSong = payload;
@@ -121,6 +117,5 @@ export default createStore({
       });
     },
   },
-  modules: {},
   plugins: [vuexLocal.plugin],
 });

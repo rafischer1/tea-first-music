@@ -80,7 +80,6 @@ export default defineComponent({
   methods: {
     ...mapMutations(["toggleAuthModal", "toggleAuthenticated", "toggleAdmin"]),
     login(values: any, actions: any) {
-      console.log("LOGIN:", values);
       actions.setValues({
         email: "",
         password: "",
