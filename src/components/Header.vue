@@ -71,8 +71,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapMutations, mapState } from "vuex";
-import store from "@/store";
+import { mapMutations, mapState, useStore } from "vuex";
 
 export default defineComponent({
   name: "raf-header",
@@ -100,6 +99,7 @@ export default defineComponent({
       }
     },
     signOut() {
+      const store = useStore();
       this.$data.loading = true;
       setTimeout(() => {
         this.toggleAuthenticated();
