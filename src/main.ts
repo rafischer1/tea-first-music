@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
 import "./assets/main.css";
+import "./registerServiceWorker";
 import IconDirective from "@/directives/icon.directive";
 import i18n from "./includes/i18n";
 
