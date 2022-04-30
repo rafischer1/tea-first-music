@@ -7,7 +7,10 @@ import "./assets/main.css";
 import "./registerServiceWorker";
 import IconDirective from "@/directives/icon.directive";
 import i18n from "./includes/i18n";
+import ProgressBar from "./includes/progress-bar";
+import "nprogress/nprogress.css";
 
+ProgressBar(router);
 const app = createApp(App).use(i18n);
 app.use(store);
 app.use(router);
