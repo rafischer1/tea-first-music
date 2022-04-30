@@ -11,24 +11,34 @@ if (process.env.NODE_ENV === "production") {
       );
     },
     registered() {
-      console.log("Service worker has been registered.");
+      console.log("%c Service worker has been registered.", "color: blue;");
     },
     cached() {
-      console.log("Content has been cached for offline use.");
+      console.log(
+        "%c Content has been cached for offline use.",
+        "color: green;"
+      );
     },
     updatefound() {
-      console.log("New content is downloading.");
+      console.log("%c New content is downloading.", "color: lightblue;");
     },
     updated() {
-      console.log("New content is available; please refresh.");
+      console.log(
+        "%c New content is available; please refresh.",
+        "color: pink;"
+      );
     },
     offline() {
       console.log(
-        "No internet connection found. App is running in offline mode."
+        "%c No internet connection found. App is running in offline mode.",
+        "color: teal; background: white;"
       );
     },
     error(error) {
-      console.error("Error during service worker registration:", error);
+      console.error(
+        "%c Error during service worker registration: " + error,
+        "color: red;"
+      );
     },
   });
 }
