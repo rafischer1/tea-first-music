@@ -1,6 +1,6 @@
 <template>
   <!-- Introduction -->
-  <section class="mb-8 py-20 text-white text-center static">
+  <section id="introduction" class="mb-8 py-20 text-white text-center static">
     <div class="absolute inset-0 w-full h-full bg-contain introduction-bg">
       <img
         class="relative block mx-auto mt-5 w-auto h-7/8"
@@ -12,7 +12,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "raf-intro",
-};
+});
 </script>
