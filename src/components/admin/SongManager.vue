@@ -5,7 +5,7 @@
         <span class="card-title">Tracks</span>
         <i class="fa fa-compact-disc float-right text-teal-600 text-2xl"></i>
       </div>
-      <div class="p-6">
+      <div class="p-6" v-if="tracks.length > 0">
         <!-- Composition Items -->
         <raf-comp-item
           v-for="(track, i) in tracks"
@@ -15,6 +15,9 @@
           :updateTrack="updateTrack"
           :removeTrack="removeTrack"
         />
+      </div>
+      <div v-else class="text-orange text-center m-6">
+        Tracks not loading - check firebase connection
       </div>
     </div>
   </div>
