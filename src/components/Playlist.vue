@@ -1,6 +1,6 @@
 <template>
   <!-- Playlist -->
-  <ol id="playlist">
+  <ol id="playlist" v-if="tracks.length > 0">
     <raf-song
       v-for="(track, i) in tracks"
       :key="track.docId"
@@ -9,6 +9,11 @@
       :index="i"
     />
   </ol>
+  <div v-else>
+    <div class="bg-white text-orange text-center m-5 p-5">
+      Tracks loading....
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
