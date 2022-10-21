@@ -95,7 +95,7 @@ export default defineComponent({
       } else {
         console.log(
           "%c" + selected.toUpperCase() + " already set as locale!",
-          "color: teal; background: white; padding: 4px; border-radius: 50px;"
+          "color: teal; background: white; padding: 4px; border-radius: 40px;"
         );
       }
     },
@@ -108,7 +108,7 @@ export default defineComponent({
         }
         this.$router.push({ name: "home" });
         this.$data.loading = false;
-      }, 2000);
+      }, 1750);
     },
   },
   computed: {
