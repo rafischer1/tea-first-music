@@ -106,7 +106,8 @@ export default defineComponent({
         if (store.state.admin) {
           this.toggleAdmin();
         }
-        this.$router.push({ name: "home" });
+        const home = "home";
+        this.$router.push({ name: home });
         this.$data.loading = false;
       }, 1750);
     },
